@@ -1,0 +1,102 @@
+[
+  {
+    "nombre": "Comúnes",
+    "filtros":
+    [
+      "RGB",
+      "Conversión grises",
+      "Histograma"
+    ]
+  },
+  {
+    "nombre": "Operaciones aritmeticas",
+    "filtros":
+    [
+      "Suma",
+      "Resta",
+      "Multiplicación"
+    ]
+  },
+  {
+    "nombre": "Operaciones lógicas",
+    "filtros":
+    [
+      "OR",
+      "AND",
+      "XOR",
+      "NOT"
+    ]
+  },
+  {
+    "nombre": "Umbralización",
+    "filtros":
+    [
+      "Umbral simple",
+      "Umbral adaptativo",
+      "Umbral binario",
+      "Umbral Otsu",
+      "Umbral binario inverso"
+    ]
+  },
+  {
+    "nombre": "Ajuste de brillo",
+    "filtros":
+    [
+      "Uniforme",
+      "Raleigh",
+      "Hipercubica",
+      "Exponencial",
+      "Logaritmo Hiperbólica",
+      "Expansión",
+      "Contracción",
+      "Corrección Gamma"
+    ]
+  },
+  {
+    "nombre": "Segmentación",
+    "filtros":
+    [
+      "Segmentación completa mediante Umbral Media",
+      "Segmentación completa mediante Método de Otsu",
+      "Segmentación completa mediante Multiumbralización",
+      "Segmentación completa mediante Entropia de Kapur",
+      "Segmentación mediante umbral banda",
+      "Segmentación mediante umbral adaptativo",
+      "Segmentación completa mediante Mínimo del histograma"
+    ]
+  },
+  {
+    "nombre": "Pasa bajas",
+    "filtros":
+    [
+      "Promediador",
+      "Promediador pesado",
+      "Mediana",
+      "Moda",
+      "Bilateral",
+      "Máximo y minimo",
+      "Gaussiano"
+    ]
+  },
+  {
+    "nombre": "Pasa altas",
+    "filtros":
+    [
+      "Mascaras de Robinson",
+      "Operador de Robert",
+      "Operador de Prewitt",
+      "Operador de Sobel",
+      "Compás de Kirch",
+      "Canny",
+      "Laplaciano"
+    ]
+  },
+  {
+    "nombre": "Ruido",
+    "filtros":
+    [
+      "Sal y Pimienta",
+      "Gaussiano"
+    ]
+  }
+]

@@ -1,0 +1,21 @@
+#miLabel {
+    color: darkblue;
+    font-size: 18px;
+    font-weight: bold;
+}
+#miBoton {
+    background-color: lightblue;
+    border: 2px solid navy;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 16px;
+}
+#miBoton:hover {
+    background-color: deepskyblue;
+}
+#miBoton:pressed {
+    background-color: dodgerblue;
+}
+QMainWindow {
+    background-color: #f0f0f0;
+}

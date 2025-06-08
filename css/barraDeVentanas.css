@@ -1,0 +1,27 @@
+#scroll_ventanas
+{
+    margin: 0;
+    padding: 0;
+}
+#btn_ventanas
+{
+    background: transparent;
+    border: none;
+}
+#btn_ventanas:hover
+{
+    border: none;
+    border-radius: 5px;
+    background-color: gray;
+}
+#btn_ventanas:pressed
+{
+    background-color: transparent;
+}
+#label_imagen_ventana
+{
+    font-family: "Arial";
+    font-size: 10pt;
+    padding-left: 5px;
+    padding-right: 5px;
+}

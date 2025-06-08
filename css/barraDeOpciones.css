@@ -1,0 +1,83 @@
+#btn_barra_opciones_iconos, #btn_barra_opciones_texto
+{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+#btn_barra_opciones_texto
+{
+    font-family: "Arial";
+    font-size: 15pt;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: transparent;
+    border: none;
+}
+#btn_barra_opciones_texto:hover
+{
+    border: none;
+    border-radius: 5px;
+    background-color: gray;
+}
+#btn_barra_opciones_texto:pressed
+{
+    background-color: transparent;
+}
+#btn_desplegable
+{
+    font-family: "Arial";
+    font-size: 13pt;
+    background: transparent;
+    border: none;
+}
+#btn_desplegable:hover
+{
+    border: none;
+    border-radius: 5px;
+    background-color: gray;
+}
+#btn_desplegable:pressed
+{
+    background-color: transparent;
+}
+#btn_contenedor
+{
+    background: transparent;
+    border: none;
+    margin: 0;
+}
+#btn_layout
+{
+    background: transparent;
+    border: none;
+    margin: 0;
+}
+#btn_scroll_area
+{
+    border: none;
+    background: transparent;
+}
+#btn_scroll_horizontal
+{
+    background-color: transparent;
+    width: 10px;
+    height: 10px;
+}
+#btn_scroll_horizontal::add-line, #btn_scroll_horizontal::sub-line
+{
+    background: none;
+    border: none;
+    height: 0;
+    width: 0;
+}
+#btn_scroll_horizontal::add-page, #btn_scroll_horizontal::sub-page
+{
+    background: transparent;
+}
+
+#btn_scroll_horizontal::handle
+{
+    background: rgba(53,53,53,0.83);
+    border-radius: 6px;
+    min-height: 30px;
+    max-height: 30px;
+}
