@@ -66,5 +66,24 @@ class Imagen:
         shutil.rmtree(self.ruta_carpeta)
 
     def descargar_imagen(self):
-        carpeta = filedialog.askdirectory(title="")
-        
+
+        nombre_imagen = os.path.basename(self.imagen_linea_tiempo[self.imagen_actual])
+
+        ruta = filedialog.asksaveasfilename(initialfile= nombre_imagen, defaultextension=".png", filetypes=[("All files", "*.*")], title="Guardar imagen como")
+        imagen = cv2.imread(self.imagen_linea_tiempo[self.imagen_actual], cv2.IMREAD_UNCHANGED)
+
+        # Usar la ruta seleccionada
+        if ruta:
+            cv2.imwrite(ruta, imagen)
+        else:
+            return
+
+    def descargar_carpeta(self):
+
+        nombre_carpeta = filedialog.askdirectory(title="Guardar carpeta como")
+
+        nombre_ultima_carpeta = os.path.basename(os.path.normpath(self.ruta_carpeta))
+
+        nombre_carpeta_final = nombre_carpeta + "/" + nombre_ultima_carpeta
+
+        shutil.make_archive(nombre_carpeta_final, 'zip', self.ruta_carpeta)

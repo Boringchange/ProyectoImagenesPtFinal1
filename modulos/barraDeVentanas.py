@@ -31,12 +31,12 @@ class BarraVentanas(QWidget):
 
         self.barra_ventana.addWidget(self.barra_ventana_original)
 
-    def mostrar_context_menu(self, pos):
+    def mostrar_context_menu(self, pos, objeto):
         menu = QMenu(self)
         accion = menu.addAction("Descargar imagen")
         accion2 = menu.addAction("Descargar paquete de imagenes")
-        accion.triggered.connect(lambda: print("Hola desde el menú!"))
-        accion2.triggered.connect(lambda: )
+        accion.triggered.connect(lambda: objeto.descargar_imagen())
+        accion2.triggered.connect(lambda: objeto.descargar_carpeta())
         menu.exec(self.mapToGlobal(pos))
 
     def crear_scroll_default(self, referenciaPadre):
@@ -61,9 +61,11 @@ class BarraVentanas(QWidget):
 
         for imagen_objeto in referenciaPadre.imagenes_agregadas:
             imagen_icono = QToolButton()
-            imagen_icono.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
-            imagen_icono.customContextMenuRequested.connect()
+
             imagen_icono.setIcon(self.imagen)
+
+            imagen_icono.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+            imagen_icono.customContextMenuRequested.connect(lambda pos, ob = imagen_objeto: self.mostrar_context_menu(pos, ob))
 
             ruta_imagen = imagen_objeto.imagen_linea_tiempo[imagen_objeto.imagen_actual]
             nombre = os.path.split(os.path.basename(ruta_imagen))[0]
@@ -122,6 +124,9 @@ class BarraVentanas(QWidget):
 
             ventana_contenedor = QWidget()
             ventana_layout = QHBoxLayout()
+
+            ventana_contenedor.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+            ventana_contenedor.customContextMenuRequested.connect(lambda pos, ob=imagen_objeto: self.mostrar_context_menu(pos, ob))
 
             ventana_contenedor.setContentsMargins(0,0,0,0)
             ventana_layout.setContentsMargins(0,0,0,0)
