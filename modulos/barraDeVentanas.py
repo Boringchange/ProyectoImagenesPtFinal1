@@ -212,8 +212,6 @@ class BarraVentanas(QWidget):
 
         self.mostrar_imagen(objeto_imagen)
 
-        self.activar_desactivar_botones()
-
 
     def mostrar_imagen(self, objeto):
 
@@ -231,6 +229,7 @@ class BarraVentanas(QWidget):
         self.barra_ventana.replaceWidget(widgetActual, barra_ventana_original)
         widgetActual.hide()
 
+        self.activar_desactivar_botones_general()
         barra_ventana_original.show()
 
     def eliminar_imagen(self, objeto):
@@ -252,11 +251,29 @@ class BarraVentanas(QWidget):
             self.referenciaPadre.objeto_actual = None
             widgetActual.hide()
             barra_ventana_original.show()
+            self.activar_desactivar_botones_general()
 
-        self.activar_desactivar_botones()
 
-    def activar_desactivar_botones(self):
+    def activar_desactivar_botones_general(self):
         if self.referenciaPadre.objeto_actual is None:
             self.referenciaPadre.barra_herramientas.barra_herramientas.setDisabled(True)
+            self.activar_desactivar_botones_funcionalidad()
         else:
             self.referenciaPadre.barra_herramientas.barra_herramientas.setDisabled(False)
+
+    def activar_desactivar_botones_funcionalidad(self):
+        try:
+            if self.referenciaPadre.objeto_actual.imagen_actual <= 0:
+                self.referenciaPadre.barra_herramientas.flecha_izquierda_icono.setDisabled(True)
+            else:
+                self.referenciaPadre.barra_herramientas.flecha_izquierda_icono.setDisabled(False)
+            if self.referenciaPadre.objeto_actual.imagen_actual >= (self.referenciaPadre.objeto_actual.imagen_linea_tiempo.length() - 1):
+                self.referenciaPadre.barra_herramientas.flecha_derecha_icono.setDisabled(True)
+            else:
+                self.referenciaPadre.barra_herramientas.flecha_derecha_icono.setDisabled(False)
+            if self.referenciaPadre.objeto_actual.imagen_linea_tiempo.length() > 0:
+                self.referenciaPadre.barra_herramientas.recargar_icon.setDisabled(False)
+            else:
+                self.referenciaPadre.barra_herramientas.recargar_icon.setDisabled(True)
+        except:
+            return
