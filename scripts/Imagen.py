@@ -1,7 +1,11 @@
 import shutil
+from tkinter import filedialog
 
 import cv2
 import os
+
+from PyQt6.QtWidgets import QFileDialog
+
 
 class Imagen:
 
@@ -52,9 +56,15 @@ class Imagen:
 
                 if(os.path.exists(ruta_eliminar)):
                     os.remove(ruta_eliminar)
+
+                print(ruta_eliminar)
                 self.tam_imagen_linea_tiempo -= 1
         except:
-            print("Imagenes borradas")
+            self.imagen_actual = 0
 
     def eliminar_imagen(self):
         shutil.rmtree(self.ruta_carpeta)
+
+    def descargar_imagen(self):
+        carpeta = filedialog.askdirectory(title="")
+        

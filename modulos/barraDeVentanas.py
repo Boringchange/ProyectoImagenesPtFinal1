@@ -6,7 +6,7 @@ import cv2
 from PyQt6.QtCore import Qt, QSize, QEvent, QTimer
 from PyQt6.QtGui import QIcon, QPixmap, QImage
 from PyQt6.QtWidgets import QDockWidget, QWidget, QVBoxLayout, QScrollArea, QToolButton, QLabel, QSizePolicy, QFrame, \
-    QHBoxLayout
+    QHBoxLayout, QMenu
 import scripts.ProcesamientoImagenes
 from scripts.Imagen import Imagen
 from scripts.ProcesamientoImagenes import seleccionar_imagen
@@ -31,6 +31,14 @@ class BarraVentanas(QWidget):
 
         self.barra_ventana.addWidget(self.barra_ventana_original)
 
+    def mostrar_context_menu(self, pos):
+        menu = QMenu(self)
+        accion = menu.addAction("Descargar imagen")
+        accion2 = menu.addAction("Descargar paquete de imagenes")
+        accion.triggered.connect(lambda: print("Hola desde el menú!"))
+        accion2.triggered.connect(lambda: )
+        menu.exec(self.mapToGlobal(pos))
+
     def crear_scroll_default(self, referenciaPadre):
 
         scroll = QScrollArea()
@@ -53,6 +61,8 @@ class BarraVentanas(QWidget):
 
         for imagen_objeto in referenciaPadre.imagenes_agregadas:
             imagen_icono = QToolButton()
+            imagen_icono.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+            imagen_icono.customContextMenuRequested.connect()
             imagen_icono.setIcon(self.imagen)
 
             ruta_imagen = imagen_objeto.imagen_linea_tiempo[imagen_objeto.imagen_actual]
@@ -257,9 +267,9 @@ class BarraVentanas(QWidget):
     def activar_desactivar_botones_general(self):
         if self.referenciaPadre.objeto_actual is None:
             self.referenciaPadre.barra_herramientas.barra_herramientas.setDisabled(True)
-            self.activar_desactivar_botones_funcionalidad()
         else:
             self.referenciaPadre.barra_herramientas.barra_herramientas.setDisabled(False)
+            self.activar_desactivar_botones_funcionalidad()
 
     def activar_desactivar_botones_funcionalidad(self):
         try:
@@ -267,11 +277,11 @@ class BarraVentanas(QWidget):
                 self.referenciaPadre.barra_herramientas.flecha_izquierda_icono.setDisabled(True)
             else:
                 self.referenciaPadre.barra_herramientas.flecha_izquierda_icono.setDisabled(False)
-            if self.referenciaPadre.objeto_actual.imagen_actual >= (self.referenciaPadre.objeto_actual.imagen_linea_tiempo.length() - 1):
+            if self.referenciaPadre.objeto_actual.imagen_actual >= (self.referenciaPadre.objeto_actual.imagen_linea_tiempo.__len__() - 1):
                 self.referenciaPadre.barra_herramientas.flecha_derecha_icono.setDisabled(True)
             else:
                 self.referenciaPadre.barra_herramientas.flecha_derecha_icono.setDisabled(False)
-            if self.referenciaPadre.objeto_actual.imagen_linea_tiempo.length() > 0:
+            if self.referenciaPadre.objeto_actual.imagen_linea_tiempo.__len__() > 1:
                 self.referenciaPadre.barra_herramientas.recargar_icon.setDisabled(False)
             else:
                 self.referenciaPadre.barra_herramientas.recargar_icon.setDisabled(True)

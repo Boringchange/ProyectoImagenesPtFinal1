@@ -1,33 +1,21 @@
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QDialog, QVBoxLayout, QLabel
+from PyQt6.QtWidgets import QApplication, QWidget, QMenu, QLabel
+from PyQt6.QtCore import Qt
 import sys
 
-class VentanaEmergente(QDialog):
+class MyWidget(QLabel):
     def __init__(self):
-        super().__init__()
-        self.setWindowTitle("Ventana Emergente")
-        self.setFixedSize(200, 100)
+        super().__init__("Haz clic derecho aquí")
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.customContextMenuRequested.connect(self.show_context_menu)
 
-        layout = QVBoxLayout()
-        layout.addWidget(QLabel("¡Hola desde la ventana emergente!"))
-        self.setLayout(layout)
+    def show_context_menu(self, pos):
+        menu = QMenu(self)
+        accion = menu.addAction("Saludar")
+        accion.triggered.connect(lambda: print("Hola desde el menú!"))
+        menu.exec(self.mapToGlobal(pos))
 
-class VentanaPrincipal(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("Ventana Principal")
-        self.setFixedSize(300, 200)
-
-        boton = QPushButton("Abrir Emergente", self)
-        boton.clicked.connect(self.mostrar_emergente)
-        boton.resize(200, 40)
-        boton.move(50, 80)
-
-    def mostrar_emergente(self):
-        dialogo = VentanaEmergente()
-        dialogo.exec()  # Bloquea hasta que se cierra la ventana emergente
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    ventana = VentanaPrincipal()
-    ventana.show()
-    sys.exit(app.exec())
+app = QApplication(sys.argv)
+widget = MyWidget()
+widget.resize(300, 200)
+widget.show()
+sys.exit(app.exec())

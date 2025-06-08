@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QLabel, QToolButton, QListWidget, QPushButton, QFram
     QWidget, QHBoxLayout
 import json
 
-from scripts.ProcesamientoImagenes import mostrar_imagenes_rgb, conversion_grises
+from scripts.ProcesamientoImagenes import mostrar_imagenes_rgb, conversion_grises, mostrar_histograma
 
 
 class DesplegableBotones(QFrame):
@@ -53,6 +53,7 @@ class BarraHerramientas:
         self.flecha_izquierda_icono.setDisabled(True)
         self.flecha_izquierda_icono.setToolTip(self.flecha_izquierda_icono.text())
         self.flecha_izquierda_icono.setObjectName("btn_barra_opciones_iconos")
+        self.flecha_izquierda_icono.clicked.connect(lambda: self.deshacer_cambio())
 
         self.flecha_derecha_icono = QToolButton()
         self.flecha_derecha_icono.setIcon(flecha_derecha)
@@ -60,6 +61,7 @@ class BarraHerramientas:
         self.flecha_derecha_icono.setDisabled(True)
         self.flecha_derecha_icono.setToolTip(self.flecha_derecha_icono.text())
         self.flecha_derecha_icono.setObjectName("btn_barra_opciones_iconos")
+        self.flecha_derecha_icono.clicked.connect(lambda: self.rehacer_cambio())
 
         self.recargar_icon = QToolButton()
         self.recargar_icon.setIcon(recargar)
@@ -67,6 +69,7 @@ class BarraHerramientas:
         self.recargar_icon.setDisabled(True)
         self.recargar_icon.setToolTip(self.recargar_icon.text())
         self.recargar_icon.setObjectName("btn_barra_opciones_iconos")
+        self.recargar_icon.clicked.connect(lambda: self.reiniciar_imagen())
 
         #Agregamos los botones a la barra
 
@@ -127,3 +130,17 @@ class BarraHerramientas:
             imagen = conversion_grises(self.ventana.objeto_actual)
             self.ventana.objeto_actual.realizar_cambio(imagen)
             self.ventana.barra_ventanas.mostrar_imagen(self.ventana.objeto_actual)
+        elif nombre == "Histograma":
+            mostrar_histograma(self.ventana.objeto_actual)
+
+    def deshacer_cambio(self):
+        self.ventana.objeto_actual.imagen_actual = self.ventana.objeto_actual.imagen_actual - 1
+        self.ventana.barra_ventanas.mostrar_imagen(self.ventana.objeto_actual)
+
+    def rehacer_cambio(self):
+        self.ventana.objeto_actual.imagen_actual = self.ventana.objeto_actual.imagen_actual + 1
+        self.ventana.barra_ventanas.mostrar_imagen(self.ventana.objeto_actual)
+
+    def reiniciar_imagen(self):
+        self.ventana.objeto_actual.reiniciar_imagen()
+        self.ventana.barra_ventanas.mostrar_imagen(self.ventana.objeto_actual)

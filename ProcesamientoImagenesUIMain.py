@@ -38,6 +38,10 @@ class ProcesamientoImagenesApp(QMainWindow):
 
         self.statusBar().showMessage("XD")
 
+    def closeEvent(self, event):
+        for imagen in self.imagenes_agregadas:
+            imagen.eliminar_imagen()
+
 def cargar_estilos(*archivos_css):
     estilos_combinados = ""
     for archivo in archivos_css:
